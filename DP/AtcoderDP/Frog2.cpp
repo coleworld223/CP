@@ -4,8 +4,8 @@ using namespace std;
 using ll = long long;
 
 void solve () {
-    ll n;
-    cin >> n;
+    ll n, k;
+    cin >> n >> k;
 
     ll inf = 1e18;
 
@@ -17,9 +17,10 @@ void solve () {
 
     dp[0] = 0;
 
-    for (ll i = 1; i < n; i += 1) {
-        dp[i] = min ({dp[i], (i - 1 >= 0 ? dp[i - 1] + abs (h[i] - h[i - 1]) : inf),
-         (i - 2 >= 0? dp[i - 2] + abs (h[i] - h[i - 2]) : inf)});
+    for (ll i = 0; i < n; i += 1) {
+        for (ll j = i; j >= max (0ll, i - k); j -= 1) {
+            dp[i] = min (dp[i], dp[j] + abs (h[i] - h[j]));
+        }
     }
 
     cout << dp[n - 1] << '\n';
