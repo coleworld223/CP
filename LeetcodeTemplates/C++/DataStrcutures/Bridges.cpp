@@ -13,7 +13,7 @@ struct bridge {
     if (ord[a] > ord[b]) swap(a, b);
     return ord[a] < low[b];
   }
-  void dfs(int u, int p, int &k) {
+  void dfs(int u, int p, int& k) {
     low[u] = ord[u] = k++;
     bool now = false;
     int pc = 0;
@@ -22,7 +22,8 @@ struct bridge {
         dfs(v, u, k);
         low[u] = min(low[u], low[v]);
         now = now || ord[u] <= low[v];
-      } else if (v != p || pc++) {
+      }
+      else if (v != p || pc++) {
         low[u] = min(low[u], ord[v]);
       }
     }
@@ -40,7 +41,8 @@ struct bridge {
             cnt++;
           }
         }
-        if (cnt >= 2) art[u] = true;
+        if (cnt >= 2)
+          art[u] = true;
       }
     }
   }
